@@ -1,0 +1,44 @@
+﻿@model JwtDemo.Models.Home.IndexModel
+
+<div>
+    Hello, @Model.Username !
+</div>
+<div>
+    <button id="buttonToken">Get token</button>
+</div>
+<div>
+    Token: <span id="spanToken">[brak]</span>
+</div>
+<div>
+    <button id="buttonApi">Call API with token</button>
+</div>
+<div>
+    API call result: <span id="spanApi">[brak]</span>
+</div>
+<script>
+
+    var token = '';
+
+    window.addEventListener('load', function () {
+        buttonToken.addEventListener('click', async function () {
+
+            var response = await fetch('/token/acquire');
+            token = await response.text();
+
+            window.spanToken.innerHTML = token;
+
+        });
+        buttonApi.addEventListener('click', async function () {
+
+            var response = await fetch('api/data', {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            var data = await response.text();
+
+            window.spanApi.innerHTML = data;
+
+        });
+    });
+</script>

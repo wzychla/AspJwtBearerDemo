@@ -1,0 +1,17 @@
+﻿@model JwtDemo.Models.Account.LogonModel
+
+<form method="post">
+    <div>
+        @Html.LabelFor( m => m.Username, "Login" )
+        @Html.TextBoxFor( m => m.Username )
+        @Html.ValidationMessageFor( m => m.Username )
+    </div>
+    <div>
+        @Html.LabelFor( m => m.Password, "Hasło")
+        @Html.PasswordFor( m => m.Password )
+        @Html.ValidationMessageFor( m => m.Password )
+    </div>
+    <div>
+        <button>Zaloguj</button>
+    </div>
+</form>
